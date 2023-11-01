@@ -1,0 +1,12 @@
+package 洛谷;
+
+import java.util.Scanner;
+
+public class P1001ABProblem {
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		int a = scanner.nextInt(),b= scanner.nextInt();
+		System.out.println(a+b);
+	}
+
+}
