@@ -1,11 +1,14 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Test {
-    public static void main(String[] args) {
-        LinkedList<Integer> list = new LinkedList<>();
-        list.add(12);
-        list.add(13);
-        list.add(14);
-        System.out.println(list.removeFirst());
+    public static void main(String[] args) throws ParseException {
+        Integer a = 12;
+        Integer b = 32;
+        double c = ((double)a - b) / b * 100;
+        Integer f = (int) c;
+        System.out.println(f);
     }
 }
