@@ -3,7 +3,7 @@ package 动态规划;
 public class _45_跳跃游戏II {
     //动态规划
     public int jump(int[] nums) {
-        //确定状态：定义dp[i]为到达第 i 个位置所需要的最小步数 。
+        //确定状态：定义dp[i]为到达i位置所需要的最小步数 。
         int[] dp = new int[nums.length];
         //确定初始状态
         dp[0] = 0;
