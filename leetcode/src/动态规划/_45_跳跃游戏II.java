@@ -6,6 +6,7 @@ public class _45_跳跃游戏II {
         //确定状态：定义dp[i]为到达i位置所需要的最小步数 。
         int[] dp = new int[nums.length];
         //确定初始状态
+
         dp[0] = 0;
         //确定状态转移方程
         int j = 0;//记录到达i位置的最远的点
