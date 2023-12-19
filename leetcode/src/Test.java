@@ -5,10 +5,12 @@ import java.util.*;
 
 public class Test {
     public static void main(String[] args) throws ParseException {
-        Deque<Integer> deque = new LinkedList<>();
+        List<Integer> deque = new LinkedList<>();
         deque.add(123);
         deque.add(234);
         deque.add(1255);
-        System.out.println(deque.poll());
+        for(int i = 0; i < 3; i++){
+            System.out.println(deque.get(i));
+        }
     }
 }
