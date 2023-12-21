@@ -5,12 +5,14 @@ import java.util.*;
 
 public class Test {
     public static void main(String[] args) throws ParseException {
-        List<Integer> deque = new LinkedList<>();
-        deque.add(123);
-        deque.add(234);
-        deque.add(1255);
-        for(int i = 0; i < 3; i++){
-            System.out.println(deque.get(i));
-        }
+        HashMap<Integer, Integer> areasMap = new HashMap();
+        areasMap.put(123, 435);
+        areasMap.put(323, 445);
+
+
+        areasMap.forEach((k, v) -> {
+            System.out.println(k);
+            System.out.println(v);
+        });
     }
 }
