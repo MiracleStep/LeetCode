@@ -2,6 +2,13 @@ package 链表;
 
 import java.util.List;
 public class _24_两两交换链表中的节点 {
+    public ListNode swapPairs0(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode tmp = head.next;
+        head.next = swapPairs(head.next.next);
+        tmp.next = head;
+        return tmp;
+    }
     //交换链表题和翻转链表题差不多。
     public ListNode swapPairs(ListNode head) {
         if (head == null) return null;

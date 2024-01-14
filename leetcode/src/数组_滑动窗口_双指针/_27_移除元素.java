@@ -1,7 +1,4 @@
-package 数组;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
+package 数组_滑动窗口_双指针;
 
 public class _27_移除元素 {
     public static void main(String[] args) {

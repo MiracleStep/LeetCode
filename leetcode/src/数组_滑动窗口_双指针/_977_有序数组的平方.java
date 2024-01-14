@@ -1,4 +1,4 @@
-package 数组;
+package 数组_滑动窗口_双指针;
 
 public class _977_有序数组的平方 {
     public static void main(String[] args) {

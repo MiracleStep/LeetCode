@@ -1,4 +1,4 @@
-package 数组;
+package 数组_滑动窗口_双指针;
 
 import java.util.Arrays;
 
