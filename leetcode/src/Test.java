@@ -13,5 +13,7 @@ public class Test {
         System.out.println(deque);//[67, 123, 345, 333]
         System.out.println(deque.peek());//67
         System.out.println(deque.remove());//67
+        ArrayList<Integer> arrayList;
+        arrayList = new ArrayList<>();
     }
 }
