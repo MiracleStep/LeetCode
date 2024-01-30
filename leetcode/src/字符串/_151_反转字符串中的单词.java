@@ -3,23 +3,18 @@ package 字符串;
 public class _151_反转字符串中的单词 {
     public String reverseWords(String s) {
         StringBuilder sb = new StringBuilder();
-
-        for (int right = s.length() - 1; right >= 0; right--){
-            if (s.charAt(right) != ' '){
-                int left;
-                for (left = right; left >= 0;){
-                    if (s.charAt(left) != ' '){
-                        left--;
-                    } else {
-                        break;
-                    }
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (s.charAt(i) != ' ') {
+                int start = i;
+                while (start >= 0 && s.charAt(start) != ' ') {
+                    start--;
                 }
-                sb.append(s, left+1, right+1);
-                sb.append(' ');
-                right = left;
+                sb.append(s.substring(start + 1, i + 1));
+                sb.append(" ");
+                i = start + 1;
             }
         }
-        sb.deleteCharAt(sb.length() - 1); //删除最后一个单词后的空格
-        return sb.toString();
+
+        return sb.substring(0, sb.length() - 1);
     }
 }
