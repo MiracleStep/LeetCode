@@ -6,29 +6,46 @@ import java.util.List;
 import java.util.Queue;
 
 public class _199_二叉树的右视图 {
-    //层次遍历。
+    //BFS：层次遍历。
     public List<Integer> rightSideView(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
+        List<Integer> res = new ArrayList<>();
+        if (root == null) return res;
         Queue<TreeNode> queue = new LinkedList<>();
-        if (root == null) return list;
         queue.offer(root);
         while (!queue.isEmpty()) {
             int size = queue.size();
-            while (size-- > 0) {
-                TreeNode cur = queue.poll();
-                // list.add(cur.val);
-                if (cur.left != null) {
-                    queue.offer(cur.left);
+            TreeNode poll = null;
+            while (size > 0) {
+                poll = queue.poll();
+                if (poll.left != null) {
+                    queue.offer(poll.left);
                 }
-
-                if (cur.right != null) {
-                    queue.offer(cur.right);
+                if (poll.right != null) {
+                    queue.offer(poll.right);
                 }
-                if (size == 0) {
-                    list.add(cur.val);
-                }
+                size--;
             }
+            res.add(poll.val);
         }
-        return list;
+        return res;
+    }
+    //DFS
+    List<Integer> res = new ArrayList<>();
+
+    public List<Integer> rightSideView2(TreeNode root) {
+        dfs(root, 0);
+        return res;
+    }
+
+    private void dfs(TreeNode root, int depth) {
+        if (root == null) return;
+
+        if (res.size() == depth) {
+            res.add(root.val);
+        }
+
+        depth++;
+        dfs(root.right, depth);
+        dfs(root.left, depth);
     }
 }
