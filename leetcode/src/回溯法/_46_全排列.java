@@ -6,31 +6,29 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class _46_全排列 {
+    List<List<Integer>> res = new ArrayList<>();
+
     public List<List<Integer>> permute(int[] nums) {
-        int len = nums.length;
-        List<List<Integer>> res = new ArrayList<>();
-        if(len == 0){
-            return res;
-        }
-        boolean[] used = new boolean[len];
-        Deque<Integer> path = new LinkedList<>();
-        dfs(nums, len, used, path, res);
+        if (nums.length == 0) return res;
+        Deque<Integer> deque = new LinkedList<>();
+        boolean[] vis = new boolean[nums.length];
+        dfs(nums, deque, vis, 0);
         return res;
     }
 
-    public void dfs(int[] nums, int len, boolean[] used, Deque<Integer> path, List<List<Integer>> res){
-        if(path.size() == len){
-            res.add(new ArrayList<>(path));
+    private void dfs(int[] nums, Deque<Integer> deque, boolean[] vis, int index) {
+        if (index == nums.length) {
+            res.add(new ArrayList<>(deque));
             return;
         }
-        for(int i = 0; i < len; i++){
-            if(used[i] == false){
-                path.addLast(nums[i]);
-                used[i] = true;
-                dfs(nums, len, used, path, res);
-                used[i] = false;
-                path.removeLast();
-            }
+        for (int i = 0; i < nums.length; i++) {
+            if (vis[i] == true) continue;
+            vis[i] = true;
+            deque.offer(nums[i]);
+            dfs(nums, deque, vis, index + 1);
+            //回溯操作
+            deque.pollLast();
+            vis[i] = false;
         }
     }
 }
