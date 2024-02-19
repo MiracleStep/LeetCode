@@ -3,38 +3,35 @@ package 回溯法;
 import java.util.*;
 
 public class _17_电话号码的字母组合 {
+    List<String> res = new ArrayList<>();
     public List<String> letterCombinations(String digits) {
-        Map<Character, String> phoneMap = new HashMap<Character, String>();
-        phoneMap.put('2', "abc");
-        phoneMap.put('3', "def");
-        phoneMap.put('4', "ghi");
-        phoneMap.put('5', "jkl");
-        phoneMap.put('6', "mno");
-        phoneMap.put('7', "pqrs");
-        phoneMap.put('8', "tuv");
-        phoneMap.put('9', "wxyz");
-        int len = digits.length();
-        List<String> res = new ArrayList<>();
-
-        if(len == 0){
+        if (digits.length() == 0) {
             return res;
         }
-        char[] path = new char[len];
-        dfs(digits, phoneMap, 0, len, path, res);
+        HashMap<Character, String> map = new HashMap<>();
+        map.put('2', "abc");
+        map.put('3', "def");
+        map.put('4', "ghi");
+        map.put('5', "jkl");
+        map.put('6', "mno");
+        map.put('7', "pqrs");
+        map.put('8', "tuv");
+        map.put('9', "wxyz");
+
+        dfs(map, new StringBuilder(), digits, 0);
         return res;
     }
 
-    public void dfs(String digits, Map<Character, String> phoneMap, int depth, int len, char[] path, List<String> res){
-        if(depth == len){
-            res.add(new String(path));
+    private void dfs(HashMap<Character, String> map, StringBuilder sb, String digits, int index) {
+        if (index == digits.length()) {
+            res.add(sb.toString());
             return;
         }
-        String curChars = phoneMap.get(digits.charAt(depth));
-        for(int i = 0;i < curChars.length(); i++){
-            path[depth] = curChars.charAt(i);
-            depth++;
-            dfs(digits, phoneMap, depth, len, path, res);
-            depth--;
+        String curStr = map.get(digits.charAt(index));
+        for (int i = 0; i < curStr.length(); i++) {
+            sb.append(curStr.charAt(i));
+            dfs(map, sb, digits, index + 1);
+            sb.deleteCharAt(index);
         }
     }
 }

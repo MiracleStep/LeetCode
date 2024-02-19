@@ -6,32 +6,30 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class _39_组合总和 {
-    public static void main(String[] args) {
-        new _39_组合总和().combinationSum(new int[]{2, 3, 6, 7}, 7);
-    }
+    List<List<Integer>> res = new ArrayList<>();
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> res = new ArrayList<>();
-        if(target == 0){
-            return res;
-        }
-        LinkedList<Integer> path = new LinkedList<>();
-        dfs(candidates, 0, target, res, path);
+        Arrays.sort(candidates);
+        List<Integer> list = new ArrayList<>();
+        dfs(candidates, list, 0, 0, target);
         return res;
     }
 
-    public void dfs(int[] candidates, int index, int target, List<List<Integer>> res, LinkedList<Integer> path){
-        if(target < 0){
+    private void dfs(int[] candidates, List<Integer> list, int index, int sum, int target) {
+        if (sum == target) {
+            res.add(new ArrayList<>(list));
             return;
         }
-        if(target == 0){
-            res.add(new ArrayList<>(path));
-            return ;
+        if (sum > target) {//超过target值了直接返回，剪枝
+            return;
         }
-        for(int i = index; i < candidates.length; i++){
-            path.addLast(candidates[i]);
-            dfs(candidates, i, target - candidates[i], res, path);
-            //状态恢复
-            path.removeLast();
+
+        for (int i = index; i < candidates.length; i++) {
+            if (sum + candidates[i] > target) {
+                break;
+            }
+            list.add(candidates[i]);
+            dfs(candidates, list, i, sum + candidates[i], target);
+            list.remove(list.size() - 1);
         }
     }
 }
