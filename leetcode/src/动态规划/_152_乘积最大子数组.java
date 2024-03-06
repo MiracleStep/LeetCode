@@ -24,4 +24,22 @@ public class _152_乘积最大子数组 {
         }
         return res;
     }
+
+    public int maxProduct2(int[] nums) {
+        //以i结尾的的非空连续子数组,dp[i][0]乘积最大，dp[i][1]乘积最小
+        int maxNum = nums[0], minNum = nums[0];
+        int res = maxNum;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] >= 0) {
+                maxNum = Math.max(maxNum * nums[i], nums[i]);
+                minNum = Math.min(minNum * nums[i], nums[i]);
+            } else {
+                int tmpMaxNum = maxNum, tmpMinNum = minNum;
+                maxNum = Math.max(tmpMinNum * nums[i], nums[i]);
+                minNum = Math.min(tmpMaxNum * nums[i], nums[i]);
+            }
+            res = Math.max(maxNum, res);
+        }
+        return res;
+    }
 }
