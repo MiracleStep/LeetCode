@@ -17,4 +17,18 @@ public class _62_不同路径 {
         }
         return dp[m-1][n-1];
     }
+    //一维数组优化
+    public int uniquePaths2(int m, int n) {
+        //机器人到达m行n列不同路径数量
+        int[] dp = new int[n];
+        for (int j = 0; j < n; j++) {
+            dp[j] = 1;
+        }
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                dp[j] = dp[j] + dp[j - 1];
+            }
+        }
+        return dp[n - 1];
+    }
 }
