@@ -1,5 +1,7 @@
 package 二分查找;
 
+import java.util.Arrays;
+
 public class _34_在排序数组中查找元素的第一个和最后一个位置 {
     //二分查找，有重复值
     public int[] searchRange(int[] nums, int target) {
