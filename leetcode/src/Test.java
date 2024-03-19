@@ -5,15 +5,13 @@ import java.util.*;
 
 public class Test {
     public static void main(String[] args) throws ParseException {
-        Deque<Integer> deque = new LinkedList<>();
-        deque.addLast(123);
-        deque.addLast(345);
-        deque.offer(333);// == add() 函数
-        deque.addFirst(67);
-        System.out.println(deque);//[67, 123, 345, 333]
-        System.out.println(deque.peek());//67
-        System.out.println(deque.remove());//67
-        ArrayList<Integer> arrayList;
-        arrayList = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        int k = Integer.parseInt(sc.nextLine());
+        String s = sc.nextLine();
+        int len = s.length();
+        StringBuilder sb = new StringBuilder();
+        sb.append(s.substring(len - k, len));
+        sb.append(s.substring(0, len - k));
+        System.out.println(sb.toString());
     }
 }
