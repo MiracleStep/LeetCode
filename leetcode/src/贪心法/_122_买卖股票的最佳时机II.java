@@ -2,13 +2,16 @@ package 贪心法;
 
 public class _122_买卖股票的最佳时机II {
     public int maxProfit(int[] prices) {
-        int maxProfile = 0;
-        for(int i = 1;i < prices.length; i++){
-            int profile = prices[i] - prices[i - 1];
-            if(profile > 0){
-                maxProfile += profile;
+        //贪心策略：只要今天股价比昨天高，就交易。
+        int res = 0;
+        if (prices.length < 2) {
+            return 0;
+        }
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] > prices[i - 1]) {
+                res += prices[i] - prices[i - 1];
             }
         }
-        return maxProfile;
+        return res;
     }
 }
