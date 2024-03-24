@@ -1,5 +1,7 @@
 package 贪心法;
 
+import sun.applet.AppletClassLoader;
+
 public class _122_买卖股票的最佳时机II {
     public int maxProfit(int[] prices) {
         //贪心策略：只要今天股价比昨天高，就交易。
@@ -12,6 +14,7 @@ public class _122_买卖股票的最佳时机II {
                 res += prices[i] - prices[i - 1];
             }
         }
+
         return res;
     }
 }
