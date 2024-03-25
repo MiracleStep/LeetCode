@@ -7,7 +7,7 @@ public class 选择排序 {
     public static void main(String[] args) {
         for (int end = arrays.length - 1; end > 0; end--) {
             int max = 0;
-            for (int i = end; i <= end; i++) {
+            for (int i = 1; i <= end; i++) {
                 if (arrays[max] < arrays[i]) {
                     max = i;
                 }

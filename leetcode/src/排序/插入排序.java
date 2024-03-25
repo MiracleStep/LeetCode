@@ -16,9 +16,4 @@ public class 插入排序 {
         }
         System.out.println(Arrays.toString(arrays));
     }
-    private static void swap(int i, int j) {
-        int tmp = arrays[i];
-        arrays[i] = arrays[j];
-        arrays[j] = tmp;
-    }
 }
