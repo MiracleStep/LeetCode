@@ -5,8 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/00-Test/00-Test.iml" filepath="$PROJECT_DIR$/00-Test/00-Test.iml" />
       <module fileurl="file://$PROJECT_DIR$/leetcode/leetcode.iml" filepath="$PROJECT_DIR$/leetcode/leetcode.iml" />
       <module fileurl="file://$PROJECT_DIR$/program.iml" filepath="$PROJECT_DIR$/program.iml" />
-      <module fileurl="file://$PROJECT_DIR$/数据结构与算法第一季/数据结构与算法第一季.iml" filepath="$PROJECT_DIR$/数据结构与算法第一季/数据结构与算法第一季.iml" />
-      <module fileurl="file://$PROJECT_DIR$/数据结构与算法第二季/数据结构与算法第二季.iml" filepath="$PROJECT_DIR$/数据结构与算法第二季/数据结构与算法第二季.iml" />
+      <module fileurl="file://$PROJECT_DIR$/数据结构与算法一/数据结构与算法一.iml" filepath="$PROJECT_DIR$/数据结构与算法一/数据结构与算法一.iml" />
+      <module fileurl="file://$PROJECT_DIR$/数据结构与算法二/数据结构与算法二.iml" filepath="$PROJECT_DIR$/数据结构与算法二/数据结构与算法二.iml" />
     </modules>
   </component>
 </project>
