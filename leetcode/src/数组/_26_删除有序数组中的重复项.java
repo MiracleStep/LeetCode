@@ -1,4 +1,4 @@
-package 数组_滑动窗口_双指针;
+package 数组;
 
 public class _26_删除有序数组中的重复项 {
     public int removeDuplicates(int[] nums) {

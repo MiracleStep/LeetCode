@@ -1,4 +1,4 @@
-package 数组_滑动窗口_双指针;
+package 数组;
 
 public class _27_移除元素 {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package 数组_滑动窗口_双指针;
+package 数组;
 
 public class _31_下一个排列 {
     public void nextPermutation(int[] nums) {

@@ -1,4 +1,4 @@
-package 数组_滑动窗口_双指针;
+package 数组;
 
 public class _240_搜索二维矩阵II {
     public boolean searchMatrix(int[][] matrix, int target) {

@@ -1,4 +1,4 @@
-package 数组_滑动窗口_双指针;
+package 数组;
 
 public class _88_合并两个有序数组 {
     public void merge(int[] nums1, int m, int[] nums2, int n) {

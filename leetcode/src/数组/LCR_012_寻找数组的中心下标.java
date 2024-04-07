@@ -1,4 +1,4 @@
-package 数组_滑动窗口_双指针;
+package 数组;
 
 public class LCR_012_寻找数组的中心下标 {
     //前缀和

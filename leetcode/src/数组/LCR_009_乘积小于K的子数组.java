@@ -1,4 +1,4 @@
-package 数组_滑动窗口_双指针;
+package 数组;
 
 public class LCR_009_乘积小于K的子数组 {
     public int numSubarrayProductLessThanK(int[] nums, int k) {

@@ -1,4 +1,4 @@
-package 数组_滑动窗口_双指针;
+package 数组;
 
 public class LCR_008_长度最小的子数组 {
     public static void main(String[] args) {

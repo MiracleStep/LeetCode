@@ -1,4 +1,4 @@
-package 数组_滑动窗口_双指针;
+package 数组;
 
 public class LCR_013_二维区域和检索_矩阵不可变 {
     // private int[][] matrix;
