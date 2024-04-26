@@ -24,4 +24,22 @@ public class _530_二叉搜索树的最小绝对差 {
         }
         return minSubVal;
     }
+
+    int res = Integer.MAX_VALUE;
+    int pre = -1;//因为难以获取到前一个节点，这里记录前一个节点的值
+    public int getMinimumDifference2(TreeNode root) {
+        dfs(root);
+        return res;
+    }
+    private void dfs(TreeNode root) {
+        if (root == null) return ;
+        dfs(root.left);
+        if (pre == - 1) {
+            pre = root.val;
+        } else {
+            res = Math.min(res, (root.val - pre));
+            pre = root.val;
+        }
+        dfs(root.right);
+    }
 }

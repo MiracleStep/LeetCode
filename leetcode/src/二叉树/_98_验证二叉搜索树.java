@@ -25,7 +25,7 @@ public class _98_验证二叉搜索树 {
         return true;
     }
 
-    //递归法中序遍历。
+    //递归法，中序遍历。
     // long pre = Long.MIN_VALUE; 也可以这样
     TreeNode pre = null;
     //利用二叉树中序遍历是递增的来进行判断
