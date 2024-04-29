@@ -50,65 +50,37 @@ public class _501_二叉搜索树中的众数 {
         }
         return res;
     }
-
-    public static void main(String[] args) {
-        ArrayList<Integer> list = new ArrayList<>();
-        //匿名内部类
-        int[] res = list.stream().mapToInt(new ToIntFunction<Integer>() {
-            @Override
-            public int applyAsInt(Integer value) {
-                return value.intValue();
-            }
-        }).toArray();
-        //lambda
-        int[] res2 = list.stream().mapToInt(value -> value.intValue()).toArray();
-        //方法的引用
-        int[] res3 = list.stream().mapToInt(Integer::intValue).toArray();
-    }
-    // 中序遍历
-    public void inOrder(TreeNode root, List<Integer> lst) {
-        if (root == null) {
-            return;
-        }
-        inOrder(root.left, lst);
-        lst.add(root.val);
-        inOrder(root.right, lst);
-    }
-
+    //递归法
+    List<Integer> list = new ArrayList<>();
+    TreeNode pre = null;
+    int count = 0;
+    int maxCount = 0;
     public int[] findMode2(TreeNode root) {
-        List<Integer> lst = new ArrayList<Integer>();
-        inOrder(root, lst);
-        // 记录前一个元素值
-        int pre = lst.get(0);
-        // 记录次数
-        int cnt = 1;
-        // 记录最大次数
-        int maxCnt = 1;
-        // 记录结果
-        List<Integer> res = new ArrayList<Integer>();
-        res.add(lst.get(0));
-        for(int i = 1; i < lst.size(); i++){
-            // 如果与前一个节点的值相等
-            if(pre == lst.get(i)){
-                cnt += 1;
-            }
-            else{
-                cnt = 1;
-            }
-            // 如果和最大次数相同，将值放入 res
-            if (cnt == maxCnt){
-                res.add(lst.get(i));
-            }
-            // 如果大于最大次数
-            else if(cnt > maxCnt){
-                // 更新最大次数
-                maxCnt = cnt;
-                // 重新更新 res
-                res.clear();
-                res.add(lst.get(i));
-            }
-            pre = lst.get(i);
+        dfs(root);
+        int[] res = new int[list.size()];
+        for (int i = 0; i < res.length; i++) {
+            res[i] = list.get(i);
         }
-        return res.stream().mapToInt(Integer::intValue).toArray();
+        return res;
+    }
+
+    private void dfs(TreeNode root) {
+        if (root == null) return;
+        dfs(root.left);
+        if (pre == null || pre.val != root.val) { //初始或者不等于前驱节点的值 count 直接设置为1
+            count = 1;
+        } else { //相等
+            count++;
+        }
+        pre = root;
+        if (count > maxCount) {//出现当前统计的节点大于之前的最大值就清空列表并重新添加
+            list.clear();
+            list.add(root.val);
+            maxCount = count;
+        } else if (count == maxCount) {
+            list.add(root.val);
+        }
+
+        dfs(root.right);
     }
 }
