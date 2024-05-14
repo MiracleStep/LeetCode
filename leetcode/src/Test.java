@@ -2,48 +2,21 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Test {
-    public int[] asteroidCollision(int[] asteroids) {
-        Deque<Integer> stack = new LinkedList<>();
-        for (int i = 0; i < asteroids.length; i++) {
-            int cur = asteroids[i];
-            while (!stack.isEmpty()) {
-                int peek = stack.peek();
-                if (cur > 0) {
-                    if (peek < 0) {
-                        if (cur + peek > 0) {
-                            stack.pop();
-                        } else {
-                            cur = 0;
-                        }
-                    } else {
-                        stack.push(cur);
-                        cur = 0;
-                        break;
-                    }
-                } else {
-                    if (peek < 0) {
-                        stack.push(cur);
-                        cur = 0;
-                        break;
-                    } else {
-                        if (cur + peek < 0) {
-                            stack.pop();
-                        } else {
-                            cur = 0;
-                        }
-                    }
-                }
-            }
-            if (cur != 0) {
-                stack.push(cur);
-            }
-        }
-        int[] res = new int[stack.size()];
-        for (int i = 0; i < res.length; i++) {
-            res[res.length -i - 1] = stack.pop();
-        }
-        return res;
+    public static void main(String[] args) throws ParseException {
+        Deque<Integer> deque = new LinkedList<>();
+        deque.offerLast(123);
+        deque.offerLast(345);
+        deque.offer(333);// == add() && addLast()
+        deque.offerFirst(67); // push
+        System.out.println(deque);//[67, 123, 345, 333]
+        System.out.println(deque.pop());//67   还有 peekLast() peekFirst()等函数
+        deque.push(33);
+        System.out.println(deque);
+        System.out.println(deque.peek());//67   还有 peekLast() peekFirst()等函数
+        System.out.println(deque.poll());//67  == remove() && removeFirst() && pollFirst()
+        //常用：offerLast offerFirst pollLast pollFirst peekLast peekFirst
     }
 }
