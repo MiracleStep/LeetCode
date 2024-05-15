@@ -13,13 +13,12 @@ public class _128_最长连续序列 {
         }
         int res = 0;
         for (int num : set) {
-            if (!set.contains(num - 1)) {
-                //最小的数了。
+            if (!set.contains(num + 1)) {//这个是最大的值了，没有比它更大的了
                 int curNum = num;
                 int count = 1;
-                while (set.contains(curNum + 1)) {
+                while (set.contains(curNum - 1)) {
+                    curNum--;
                     count++;
-                    curNum++;
                 }
                 res = Math.max(res, count);
             }
