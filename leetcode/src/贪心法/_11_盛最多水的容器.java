@@ -7,10 +7,7 @@ public class _11_盛最多水的容器 {
         int right = height.length - 1;
         int maxRes = Integer.MIN_VALUE;
         while (left < right) {
-            int area = Math.min(height[left], height[right]) * (right - left);//计算当前面积
-            if (area > maxRes) {
-                maxRes = area;
-            }
+            maxRes = Math.max(Math.min(height[left], height[right]) * (right - left), maxRes);
             //移动双指针
             if (height[left] <= height[right]) { //左边更矮
                 // left++;

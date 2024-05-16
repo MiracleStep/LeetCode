@@ -38,6 +38,7 @@ public class _42_接雨水 {
             leftMax = Math.max(leftMax, height[left]);
             rightMax = Math.max(rightMax, height[right]);
             if (leftMax < rightMax) {
+                //此时右边rightMax不可能变为leftMax更小了,因此可以计算left所在索引的雨水高度
                 res += leftMax - height[left];
                 left++;
             } else {
