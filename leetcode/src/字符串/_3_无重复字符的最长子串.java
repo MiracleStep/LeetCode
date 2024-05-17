@@ -7,17 +7,21 @@ import java.util.Set;
 
 public class _3_无重复字符的最长子串 {
     public int lengthOfLongestSubstring(String s) {
-        int len = s.length();
-        int res = 0, i = -1;
-        Map<Character, Integer> map = new HashMap<>();
-        for (int j = 0; j < len; j++) {
-            if (map.containsKey(s.charAt(j))) {
-                i = Math.max(i, map.get(s.charAt(j)));//更新左指针，但要确保更新结果比左指针更大。
+        HashMap<Character, Integer> map = new HashMap<>();
+        if (s.length() == 0) return 0;
+        int left = 0;
+        int len = 1;
+        map.put(s.charAt(left), 0);
+        for (int right = 1; right < s.length(); right++) {
+            char c = s.charAt(right);
+            if (map.containsKey(c) && map.get(c) >= left) {
+                left = map.get(c) + 1;//更新左指针，但要确保更新结果比左指针更大。
+            } else {
+                len = Math.max(len, right - left + 1);//更新结果
             }
-            map.put(s.charAt(j), j);//更新哈希表
-            res = Math.max(res, j - i);//更新结果
+            map.put(c, right);//更新哈希表
         }
-        return res;
+        return len;
     }
 
     public int lengthOfLongestSubstring2(String s) {
