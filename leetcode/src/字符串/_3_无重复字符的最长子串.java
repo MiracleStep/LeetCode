@@ -23,7 +23,6 @@ public class _3_无重复字符的最长子串 {
         }
         return len;
     }
-
     public int lengthOfLongestSubstring2(String s) {
         int len = s.length();
         if (len == 0) return 0;
@@ -46,4 +45,5 @@ public class _3_无重复字符的最长子串 {
         }
         return res;
     }
+
 }
