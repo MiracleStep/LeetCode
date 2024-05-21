@@ -8,25 +8,21 @@ public class _239_滑动窗口最大值 {
 
     //ac
     public int[] maxSlidingWindow(int[] nums, int k) {
-        if (nums == null || nums.length < 2) return nums;
-        //单调数组：双端队列 保存当前窗口最大值的数组位置 保证队列中数组位置的数值按从大到小排序
-        Deque<Integer> deque = new LinkedList<>(); //也可以用LinkedList接收。
-        //结果数组
-        int[] res = new int[nums.length - k + 1];
-        for (int i = 0; i < nums.length; i++){
-            //单调数组。保证从小到大 如果前面数小则需要依次弹出，直至满足要求
-            while (!deque.isEmpty() && nums[deque.peekLast()] <= nums[i]){
-                deque.pollLast(); //队列的值正常从队尾插入，队首出队。这里是从队尾出队。
+        int len = nums.length;
+        int[] res = new int[len - k + 1];
+        Deque<Integer> deque = new LinkedList<>();//维护一个单调队列（单调递减）,保存的元素是索引
+        for (int i = 0; i < len; i++) {
+            while (!deque.isEmpty() && nums[deque.peekLast()] <= nums[i]) {
+                //移除所有小于当前值的元素,因为是维护一个单调递减的队列。（元素失效了）
+                deque.pollLast();
             }
-            //添加当前值对应的数组下标
             deque.offerLast(i);
-            //判断是否需要移除队首值对应的下标
-            if (deque.peek() <= i - k){
-                deque.poll();
+            if (deque.peekFirst() <= i - k) {//保存索引的原因
+                deque.pollFirst();//移除旧的元素
             }
-            // 当窗口长度为k时 保存当前窗口中最大值
             if (i >= k - 1) {
-                res[i - k + 1] = nums[deque.peek()];
+                //有k个数了
+                res[i - k + 1] = nums[deque.peekFirst()];//获取当前最大值
             }
         }
         return res;
