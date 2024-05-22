@@ -24,7 +24,12 @@ public class _56_合并区间 {
                 list.add(intervals[i]);
             }
         }
-
+//        int[][] res = new int[list.size()][];
+//        for (int i = 0; i < list.size(); i++) {
+//            res[i] = list.get(i);
+//        }
+//
+//        return res;
         return list.toArray(new int[list.size()][]);
     }
 }
