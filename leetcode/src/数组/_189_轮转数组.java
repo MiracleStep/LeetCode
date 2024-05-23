@@ -2,24 +2,25 @@ package 数组;
 
 public class _189_轮转数组 {
     public void rotate(int[] nums, int k) {
-        int len = nums.length;
-        if(k > len) {
-            k %= len;
+        int n = nums.length;
+        if (k == n) {
+            return;
         }
-        reverse(nums, 0, len);
-        reverse(nums, k, len);
-        reverse(nums, 0, k);
+        if (k > n) {
+            k %= n;
+        }
+        reverseNums(nums, 0, n - 1);
+        reverseNums(nums, 0, k - 1);
+        reverseNums(nums, k, n - 1);
     }
 
-    //旋转数组
-    private void reverse(int[] nums, int start, int end) {
-        end--;
-        while (start < end) {
-            int temp = nums[start];
-            nums[start] = nums[end];
-            nums[end] = temp;
-            start++;
-            end--;
+    private void reverseNums(int[] nums, int left, int right) {
+        while (left < right) {
+            int tmp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = tmp;
+            left++;
+            right--;
         }
     }
 }
