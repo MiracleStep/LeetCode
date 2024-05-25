@@ -21,15 +21,12 @@ public class _160_相交链表 {
 
     //官方题解:双指针。空间复杂度o(1) 时间复杂度o(m+n)
     public ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
-        if (headA == null || headB == null) {
-            return null;
+        ListNode curA = headA, curB = headB;
+        while (curA != curB) {
+            curA = curA == null ? headB : curA.next;
+            curB = curB == null ? headA : curB.next;
         }
-        ListNode pA = headA, pB = headB;
-        while (pA != pB) {
-            pA = pA == null ? headB : pA.next;
-            pB = pB == null ? headA : pB.next;
-        }
-        return pA;
+        return curA;
     }
 
     public ListNode getIntersectionNode3(ListNode headA, ListNode headB) {
