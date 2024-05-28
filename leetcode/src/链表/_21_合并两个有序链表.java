@@ -1,6 +1,7 @@
 package 链表;
 
 public class _21_合并两个有序链表 {
+    //1
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         ListNode dummyNode = new ListNode();
         ListNode cur = dummyNode;
@@ -22,6 +23,7 @@ public class _21_合并两个有序链表 {
         }
         return dummyNode.next;
     }
+
     //递归法
     public ListNode mergeTwoLists2(ListNode list1, ListNode list2) {
         if (list1 == null) {
