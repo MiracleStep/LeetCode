@@ -17,20 +17,20 @@ public class _17_电话号码的字母组合 {
         map.put('7', "pqrs");
         map.put('8', "tuv");
         map.put('9', "wxyz");
-
-        dfs(map, new StringBuilder(), digits, 0);
+        StringBuilder sb = new StringBuilder();
+        dfs(digits, map, sb, 0);
         return res;
     }
 
-    private void dfs(HashMap<Character, String> map, StringBuilder sb, String digits, int index) {
+    private void dfs(String digits, HashMap<Character, String> map, StringBuilder sb, int index) {
         if (index == digits.length()) {
             res.add(sb.toString());
             return;
         }
-        String curStr = map.get(digits.charAt(index));
-        for (int i = 0; i < curStr.length(); i++) {
-            sb.append(curStr.charAt(i));
-            dfs(map, sb, digits, index + 1);
+        String str = map.get(digits.charAt(index));
+        for (int i = 0; i < str.length(); i++) {
+            sb.append(str.charAt(i));
+            dfs(digits, map, sb, index + 1);
             sb.deleteCharAt(index);
         }
     }
