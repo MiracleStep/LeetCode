@@ -22,7 +22,7 @@ public class _19_删除链表的倒数第N个结点 {
         cur.next = cur.next.next;
         return dummyNode.next; //返回是dummyNode的下一个节点，而不是head节点。
     }
-    //双指针优化
+    //双指针优化 最优
     public ListNode removeNthFromEnd2(ListNode head, int n) {
         ListNode dummyNode = new ListNode();
         dummyNode.next = head;
