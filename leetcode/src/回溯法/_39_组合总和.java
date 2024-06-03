@@ -1,35 +1,31 @@
 package 回溯法;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class _39_组合总和 {
     List<List<Integer>> res = new ArrayList<>();
+
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        if (candidates.length == 0) return null;
         Arrays.sort(candidates);
-        List<Integer> list = new ArrayList<>();
-        dfs(candidates, list, 0, 0, target);
+        Deque<Integer> deque = new LinkedList<>();
+        dfs(candidates, target, deque, 0, 0);
         return res;
     }
 
-    private void dfs(int[] candidates, List<Integer> list, int index, int sum, int target) {
+    private void dfs(int[] candidates, int target, Deque<Integer> deque, int sum, int begin) {
+        // if (sum > target) return;
         if (sum == target) {
-            res.add(new ArrayList<>(list));
+            res.add(new ArrayList<>(deque));
             return;
         }
-        if (sum > target) {//超过target值了直接返回，剪枝
-            return;
-        }
-
-        for (int i = index; i < candidates.length; i++) {
-            if (sum + candidates[i] > target) {
+        for (int i = begin; i < candidates.length; i++) {
+            if (sum + candidates[i] > target) {  //排序后的结果，超过直接返回
                 break;
             }
-            list.add(candidates[i]);
-            dfs(candidates, list, i, sum + candidates[i], target);
-            list.remove(list.size() - 1);
+            deque.offer(candidates[i]);
+            dfs(candidates, target, deque, sum + candidates[i], i);
+            deque.pollLast();
         }
     }
 }
