@@ -7,26 +7,26 @@ public class _148_排序链表 {
     }
 
     private ListNode sortList(ListNode head, ListNode tail) {
-        if (head == tail) return head;//为空或只有一个节点
-        if (head.next == tail) {
+        //递归基
+        if (head == tail) return head;//为空
+        if (head.next == tail) { //只有一个待排序节点
             head.next = null;//进行merge时候不会越界，导致超时。
             return head;
         }
-        //找中间结点
-        ListNode slow = head, fast = head;
+        //找链表中间结点
+        ListNode mid = head, fast = head;
         while (fast != tail && fast.next != tail) {
-            slow = slow.next;
+            mid = mid.next;
             fast = fast.next.next;
         }
-        ListNode mid = slow;//找到中间结点
         //排序
         ListNode list1 = sortList(head, mid);
         ListNode list2 = sortList(mid, tail);
-        ListNode sorted = merge(list1, list2);//合并排序好的链表1和2。LeetCode「21. 合并两个有序链表」
+        ListNode sorted = merge(list1, list2);//合并排序好的链表1和2。
         return sorted;
     }
 
-    //合并两个有序链表
+    //合并两个有序链表  参考LeetCode「21. 合并两个有序链表」
     private ListNode merge(ListNode list1, ListNode list2) {
         ListNode dummyNode = new ListNode(0);
         ListNode cur = dummyNode;
