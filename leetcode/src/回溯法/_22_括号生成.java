@@ -14,7 +14,6 @@ public class _22_括号生成 {
         return res;
     }
 
-
     private void dfs(StringBuilder sb, int left, int right) {
         if (left == 0 && right == 0) {
             res.add(sb.toString());
