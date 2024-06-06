@@ -2,40 +2,42 @@ package 链表;
 
 public class _23_合并K个升序链表 {
     public ListNode mergeKLists(ListNode[] lists) {
-        return merge(lists, 0, lists.length);
+        return mergeSort(lists, 0, lists.length);
     }
 
-    private ListNode merge(ListNode[] lists, int left, int right) {
-        int mid = left + (right - left) / 2;
+    //合并[left, right)范围内的ListNode并进行排序
+    private ListNode mergeSort(ListNode[] lists, int left, int right) {
         if (left == right - 1) {
             return lists[left];
         }
         if (left == right) {
             return null;
         }
-        ListNode leftLists = merge(lists, left, mid);
-        ListNode rightLists = merge(lists, mid, right);
-        return mergeTwoLists(leftLists, rightLists);
+        int mid = left + (right - left) / 2;
+        ListNode leftLists = mergeSort(lists, left, mid);//左边的合并并排序成功
+        ListNode rightLists = mergeSort(lists, mid, right);//右边的合并并排序成功
+        return mergeTwoList(leftLists, rightLists);//合并左右两个链表
     }
 
-
-    private ListNode mergeTwoLists(ListNode a, ListNode b) {
-        if (a == null || b == null) {
-            return a != null ? a : b;
-        }
-        ListNode dummyNode = new ListNode(0);
+    private ListNode mergeTwoList(ListNode list1, ListNode list2) {
+        ListNode dummyNode = new ListNode();
         ListNode cur = dummyNode;
-        while (a != null && b != null) {
-            if (a.val < b.val) {
-                cur.next = a;
-                a = a.next;
+        while (list1 != null && list2 != null) {
+            if (list1.val <= list2.val) {
+                cur.next = list1;
+                list1 = list1.next;
             } else {
-                cur.next = b;
-                b = b.next;
+                cur.next = list2;
+                list2 = list2.next;
             }
             cur = cur.next;
         }
-        cur.next = a == null ? b : a;
+        if (list1 != null) {
+            cur.next = list1;
+        }
+        if (list2 != null) {
+            cur.next = list2;
+        }
         return dummyNode.next;
     }
 }
