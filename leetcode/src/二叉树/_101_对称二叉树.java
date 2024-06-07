@@ -4,15 +4,14 @@ import java.util.LinkedList;
 
 public class _101_对称二叉树 {
     public boolean isSymmetric(TreeNode root) {
+        if (root == null) return true;
         return isSymmetric(root.left, root.right);
     }
 
-    public boolean isSymmetric(TreeNode left, TreeNode right){
-        if(left == null && right == null) return true;//都为空
-        if(left == null || right == null) return false; //有一个为空
-
-        if(left.val != right.val) return false;//比较是否相同
-        return isSymmetric(left.left, right.right) && isSymmetric(left.right, right.left); //递归遍历子节点。
+    public boolean isSymmetric(TreeNode left, TreeNode right) {
+        if (left == null && right == null) return true;
+        if (left == null || right == null || left.val != right.val) return false;
+        return isSymmetric(left.right, right.left) && isSymmetric(left.left, right.right);
     }
 
     public boolean isSymmetric2(TreeNode root) {

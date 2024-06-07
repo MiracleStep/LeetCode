@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class _104_二叉树的最大深度 {
+    //层次遍历
     public int maxDepth(TreeNode root) {
         if(root == null) return 0;
         Queue<TreeNode> queue = new LinkedList<>();
@@ -27,13 +28,9 @@ public class _104_二叉树的最大深度 {
         return depth;
     }
 
+    //递归法
     public int maxDepth2(TreeNode root) {
-        if(root == null){
-            return 0;
-        }
-
-        int leftDepth = maxDepth(root.left);
-        int rightDepth = maxDepth(root.right);
-        return Math.max(leftDepth, rightDepth) + 1;
+        if (root == null) return 0;
+        return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
     }
 }
