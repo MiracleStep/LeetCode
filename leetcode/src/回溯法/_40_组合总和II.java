@@ -14,9 +14,6 @@ public class _40_组合总和II {
     }
 
     private void dfs(int[] candidates, int target, int sum, int begin, Deque<Integer> deque) {
-        // if (sum > target)  {
-        //     return;
-        // }
         if (sum == target) {
             res.add(new ArrayList<>(deque));
             return;
