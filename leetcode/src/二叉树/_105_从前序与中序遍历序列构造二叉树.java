@@ -1,29 +1,34 @@
 package 二叉树;
 
-import java.util.Arrays;
+import java.util.HashMap;
 
 public class _105_从前序与中序遍历序列构造二叉树 {
+    HashMap<Integer, Integer> indexCache;
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        if (preorder.length == 0 || inorder.length == 0) return null;
-        TreeNode root = new TreeNode(preorder[0]);
-
-        for (int i = 0; i < inorder.length; i++){
-            //查找中序遍历数组的对应节点的索引
-            if (preorder[0] == inorder[i]){
-                // 找出中序遍历的左子树和右子树
-                int[] left_inorder = Arrays.copyOfRange(inorder, 0, i);
-                int[] right_inorder = Arrays.copyOfRange(inorder, i + 1, inorder.length);
-                // 找出前序遍历的左子树和右子树
-                int[] left_preorder = Arrays.copyOfRange(preorder, 1, 1 + i);
-                int[] right_preorder = Arrays.copyOfRange(preorder, 1 + i, preorder.length);
-                // 递归构建左子树
-                root.left = buildTree(left_preorder, left_inorder);
-                // 递归构建右子树
-                root.right = buildTree(right_preorder, right_inorder);
-                break;
-            }
+        int n = preorder.length;
+        // 构造哈希映射，帮助我们快速定位根节点
+        indexCache = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            indexCache.put(inorder[i], i);
         }
+        return buildTree(preorder, inorder, 0, n - 1, 0, n - 1);
+    }
 
-        return root;
+    public TreeNode buildTree(int[] preorder, int[] inorder, int pLeft, int pRight, int iLeft, int iRight) {
+        if (pLeft > pRight) {
+            return null;
+        }
+        int index = indexCache.get(preorder[pLeft]);
+        // 先把根节点建立出来
+        TreeNode cur = new TreeNode(preorder[pLeft]);
+        //左子结点的数量
+        int leftNum = index - iLeft;
+        // 递归地构造左子树，并连接到根节点
+        // 先序遍历中「从 左边界+1 开始的 size_left_subtree」个元素就对应了中序遍历中「从 左边界 开始到 根节点定位-1」的元素
+        cur.left = buildTree(preorder, inorder, pLeft + 1, pLeft + leftNum, iLeft, index - 1);
+        // 递归地构造右子树，并连接到根节点
+        // 先序遍历中「从 左边界+1+左子树节点数目 开始到 右边界」的元素就对应了中序遍历中「从 根节点定位+1 到 右边界」的元素
+        cur.right = buildTree(preorder, inorder, pLeft + leftNum + 1, pRight, index + 1, iRight);
+        return cur;
     }
 }
