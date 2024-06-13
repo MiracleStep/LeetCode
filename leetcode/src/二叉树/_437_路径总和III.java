@@ -1,11 +1,10 @@
 package 二叉树;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class _437_路径总和III {
     int res = 0;
-    HashMap<Long, Integer> map = new HashMap<>();
+    HashMap<Long, Integer> map = new HashMap<>();//保存之前遍历到的前缀和和其个数
     public int pathSum(TreeNode root, int targetSum) {
         if (root == null) return res;
         map.put(0l, 1);
