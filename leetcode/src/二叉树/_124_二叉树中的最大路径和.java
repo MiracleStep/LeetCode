@@ -30,8 +30,8 @@ public class _124_二叉树中的最大路径和 {
     //树形DP
     Map<TreeNode, int[]> map = new HashMap<>(); // 节点: [父, 左, 右]
     public int maxPathSum2(TreeNode root) {
-        dfs1(root, null);
-        dfs2(root, null);
+        dfs1(root);
+        dfs2(root);
         int ans = Integer.MIN_VALUE;
         for (TreeNode cur : map.keySet()) {
             int t = cur.val;
@@ -43,15 +43,15 @@ public class _124_二叉树中的最大路径和 {
         }
         return ans;
     }
-    int dfs1(TreeNode cur, TreeNode fa) {
+    int dfs1(TreeNode cur) {
         if (cur == null) return 0;
-        int left = dfs1(cur.left, cur), right = dfs1(cur.right, cur);
+        int left = dfs1(cur.left), right = dfs1(cur.right);
         int[] info = map.getOrDefault(cur, new int[3]);
         info[1] = left; info[2] = right;
         map.put(cur, info);
         return Math.max(cur.val, cur.val + Math.max(left, right));
     }
-    void dfs2(TreeNode cur, TreeNode fa) {
+    void dfs2(TreeNode cur) {
         if (cur == null) return ;
         int[] curInfo = map.get(cur);
         if (cur.left != null) {
@@ -62,7 +62,7 @@ public class _124_二叉树中的最大路径和 {
             int[] rightInfo = map.get(cur.right);
             rightInfo[0] = Math.max(cur.val, cur.val + Math.max(curInfo[0], curInfo[1]));
         }
-        dfs2(cur.left, cur);
-        dfs2(cur.right, cur);
+        dfs2(cur.left);
+        dfs2(cur.right);
     }
 }
