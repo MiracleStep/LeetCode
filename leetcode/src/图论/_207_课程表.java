@@ -8,8 +8,8 @@ import java.util.Queue;
 public class _207_课程表 {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         // 入度表，记录每个节点的入度数
-        int[] inDegrees = new int[numCourses];
-        // 邻接表  
+        int[] inDegress = new int[numCourses];
+        // 邻接表
         List<List<Integer>> adjacency = new ArrayList<>();
 
         // 初始化邻接表，方便后面直接在对应位置赋值
@@ -18,28 +18,25 @@ public class _207_课程表 {
         }
 
         for (int[] pre : prerequisites) {
-            // 统计每个节点的入度
-            inDegrees[pre[0]]++;
-            // 邻接表赋值，保存一个节点的所有入度相关节点；pre[1] -> pre[0]
+            inDegress[pre[0]]++;
             adjacency.get(pre[1]).add(pre[0]);
         }
 
         Queue<Integer> queue = new LinkedList<>();
         // 将所有入度为0的节点存入队列
         for (int i = 0; i < numCourses; i++) {
-            if (inDegrees[i] == 0) {
-                queue.add(i);
+            if (inDegress[i] == 0) {
+                queue.offer(i);
             }
         }
 
-        // 出队，BFS 拓扑排序
         while (!queue.isEmpty()) {
             Integer pre = queue.poll();
             numCourses--;
-            for (Integer cur : adjacency.get(pre)) {   //获取pre的所有出度对应的节点
-                inDegrees[cur]--;  // 把这个元素相关的入度的数量减少
-                if (inDegrees[cur] == 0) {  // 若入度为0，该cur完成了所有前置课程，放入队列
-                    queue.add(cur);
+            for (Integer cur : adjacency.get(pre)) {
+                inDegress[cur]--;
+                if (inDegress[cur] == 0) {
+                    queue.offer(cur);
                 }
             }
         }
