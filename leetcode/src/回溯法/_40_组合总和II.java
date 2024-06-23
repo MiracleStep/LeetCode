@@ -14,12 +14,16 @@ public class _40_组合总和II {
     }
 
     private void dfs(int[] candidates, int target, int sum, int begin, Deque<Integer> deque) {
+        // if (sum > target)  {
+        //     return;
+        // }
         if (sum == target) {
             res.add(new ArrayList<>(deque));
             return;
         }
 
         for (int i = begin; i < candidates.length; i++) {
+            //避免出现重复，如：1,2,5
             if (i > begin && candidates[i] == candidates[i - 1]) {
                 continue;
             }
