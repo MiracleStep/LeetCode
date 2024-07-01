@@ -33,7 +33,7 @@ public class _131_分割回文串 {
                 }
             }
         }
-        //开始dfs
+        //开始dfs，dp作为判断是否是回文串的依据。
         dfs(s, deque, 0, dp);
         return res;
     }
@@ -44,13 +44,14 @@ public class _131_分割回文串 {
             res.add(new ArrayList<>(deque));
             return;
         }
-        //判断条件 无
+
         //遍历
         for (int i = index; i < s.length(); i++) {
-            if (dp[index][i]) {
-                deque.offer(s.substring(index, i + 1));
+            if (dp[index][i]) {  //index - i 是回文串
+                deque.offer(s.substring(index, i + 1));  //截取index - i 的回文串.
+                //dfs 从i + 1开始
                 dfs(s, deque, i + 1, dp);
-                deque.removeLast();
+                deque.removeLast();  //回溯
             }
         }
     }
