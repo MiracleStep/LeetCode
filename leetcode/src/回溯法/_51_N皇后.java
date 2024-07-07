@@ -7,47 +7,49 @@ public class _51_N皇后 {
     Set<Integer> leftTop = new HashSet<>();
     Set<Integer> rightTop = new HashSet<>();
 
+    List<List<String>> res = new ArrayList<>();
+
     public List<List<String>> solveNQueens(int n) {
-        List<List<String>> res = new ArrayList<>();
-        if(n < 1) return res;
-        int[] queens = new int[n];
-        Arrays.fill(queens, -1);
-        place(queens, 0, res);
+        if (n == 0) {
+            return res;
+        }
+        int[] places = new int[n];
+        Arrays.fill(places, -1);
+        dfs(n, 0, places);
         return res;
     }
 
-    public void place(int[] queens, int row, List<List<String>> res){
-        if(row == queens.length){
-            res.add(generaBoard(queens));
+    public void dfs(int n, int row, int[] places) {
+        if (row == n) {
+            getAns(n, places);
             return;
         }
-
-        for(int i = 0; i < queens.length; i++){
-            //第i列
-            if(cols.contains(i) || leftTop.contains(row - i) || rightTop.contains(row + i)){
+        for (int col = 0; col < n; col++) {
+            if (cols.contains(col) || leftTop.contains(col - row) || rightTop.contains(col + row)) {
                 //不满足条件
                 continue;
             }
-            queens[row] = i;
-            cols.add(i);
-            leftTop.add(row - i);
-            rightTop.add(row + i);
-            place(queens, row + 1, res);
-            queens[row] = -1;
-            cols.remove(i);
-            leftTop.remove(row - i);
-            rightTop.remove(row + i);
+            cols.add(col);
+            leftTop.add(col - row);
+            rightTop.add(col + row);
+            places[row] = col;
+            dfs(n, row + 1, places);
+            places[row] = -1;
+            cols.remove(col);
+            leftTop.remove(col - row);
+            rightTop.remove(col + row);
         }
     }
-    //构建返回列表
-    private List<String> generaBoard(int[] queens){
+
+    public void getAns(int n, int[] places) {
         List<String> list = new ArrayList<>();
-        char[] chars = new char[queens.length];
-        for(int i = 0; i < queens.length; i++){
+        char[] chars = new char[n];
+        for (int i = 0; i < n; i++) {
+            int col = places[i];
             Arrays.fill(chars, '.');
-            chars[queens[i]] = 'Q';
+            chars[col] = 'Q';
             list.add(new String(chars));
         }
-        return list;
+        res.add(list);
     }
 }
