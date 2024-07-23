@@ -2,7 +2,6 @@ package 栈和队列;
 
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Stack;
 
 public class _739_每日温度 {
     //反向遍历
@@ -27,17 +26,15 @@ public class _739_每日温度 {
 
     //正向遍历
     public int[] dailyTemperatures2(int[] temperatures) {
-        int n = temperatures.length;
-        int[] res = new int[n];
-        Deque<Integer> stack = new LinkedList<>();
-        // Stack<Integer> stack = new Stack<>();
-        for (int i = 0; i < n; i++) {
+        int[] res = new int[temperatures.length];
+        Deque<Integer> deque = new LinkedList<>();
+        for (int i = 0; i < temperatures.length; i++) {
             int cur = temperatures[i];
-            while (!stack.isEmpty() && cur > temperatures[stack.peek()]) {
-                int pop = stack.pop();
+            while (!deque.isEmpty() && cur > temperatures[deque.peek()]) {
+                int pop = deque.pop();
                 res[pop] = i - pop;
             }
-            stack.push(i);
+            deque.push(i);
         }
         return res;
     }
