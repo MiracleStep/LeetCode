@@ -1,33 +1,55 @@
 package 堆;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.PriorityQueue;
 
 public class _347_前K个高频元素 {
-    public int[] topKFrequent(int[] nums, int k) {
-        int[] res = new int[k];
-        PriorityQueue<int[]> heap = new PriorityQueue<>((o1, o2) -> {
-            return o1[1] - o2[1];
-        });//维护空间大小为k
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 
-        for (int num : nums) {
-            map.put(num, map.getOrDefault(num, 0) + 1);
-        }
-
-        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            int num = entry.getKey(), count = entry.getValue();
-            heap.offer(new int[]{num, count});
+    //堆 最简单，但面试不要写。
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> heap = new PriorityQueue<>();
+        for (int n : nums) {
+            heap.offer(n);
             if (heap.size() > k) {
                 heap.poll();
             }
         }
+        return heap.peek();
+    }
 
-        int index = 0;
-        while (!heap.isEmpty()) {
-            res[index++] = heap.poll()[0];
+    //快速排序
+    public int findKthLargest2(int[] nums, int k) {
+        return quickSort(nums, 0, nums.length - 1, nums.length - k);
+    }
+
+    //结束条件就是到达倒数第k个，因为根据快排的规定，选择的轴点元素位置不会改变，只会继续对左右元素进行排序
+    private int quickSort(int[] nums, int begin, int end, int k) {
+        if (begin == end) return nums[begin];
+        int pivot = nums[begin], left = begin, right = end;
+        while (left < right) {
+            while (left < right) {
+                if (nums[right] >= pivot) {
+                    right--;
+                } else {
+                    nums[left++] = nums[right];
+                    break;
+                }
+            }
+            while (left < right) {
+                if (nums[left] <= pivot) {
+                    left++;
+                } else {
+                    nums[right--] = nums[left];
+                    break;
+                }
+            }
         }
-        return res;
+        nums[left] = pivot;
+        //轴点元素位置
+        if (left == k) return nums[left];
+        if (left > k) {
+            return quickSort(nums, begin, left - 1, k);
+        } else {
+            return quickSort(nums, left + 1, end, k);
+        }
     }
 }
