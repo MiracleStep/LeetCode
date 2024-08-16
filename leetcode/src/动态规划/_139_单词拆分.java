@@ -3,6 +3,7 @@ package 动态规划;
 import java.util.List;
 
 public class _139_单词拆分 {
+
     public boolean wordBreak(String s, List<String> wordDict) {
         boolean[] dp = new boolean[s.length()];//以字符串i结尾是否可以拼接
         if (s.length() == 1) {
