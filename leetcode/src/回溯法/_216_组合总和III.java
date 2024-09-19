@@ -5,26 +5,30 @@ import java.util.*;
 public class _216_组合总和III {
     List<List<Integer>> res = new ArrayList<>();
 
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        if (candidates.length == 0) return null;
-        Arrays.sort(candidates);
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        if (k == 0) return res;
         Deque<Integer> deque = new LinkedList<>();
-        dfs(candidates, target, deque, 0, 0);
+        dfs(k, n, 1, 0, deque, 0);
         return res;
     }
 
-    private void dfs(int[] candidates, int target, Deque<Integer> deque, int sum, int begin) {
-        // if (sum > target) return;
-        if (sum == target) {
+    private void dfs(int k, int n, int begin, int sum, Deque<Integer> deque, int count) {
+        // if (sum > n) {
+        //     //剪枝
+        //     return;
+        // }
+        if (count == k && sum == n) {
             res.add(new ArrayList<>(deque));
             return;
         }
-        for (int i = begin; i < candidates.length; i++) {
-            if (sum + candidates[i] > target) {  //排序后的结果，超过直接返回
+
+        for (int i = begin; i <= 9; i++) {
+            if (sum + i > n) {
+                //剪枝
                 break;
             }
-            deque.offer(candidates[i]);
-            dfs(candidates, target, deque, sum + candidates[i], i);
+            deque.offer(i);
+            dfs(k, n, i + 1, sum + i, deque, count + 1);
             deque.pollLast();
         }
     }
