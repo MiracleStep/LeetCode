@@ -6,44 +6,17 @@ public class _78_子集 {
     List<List<Integer>> res = new ArrayList<>();
 
     public List<List<Integer>> subsets(int[] nums) {
-        if (nums.length == 0) return res;
         Deque<Integer> deque = new LinkedList<>();
-        dfs(nums, deque, 0);
+        dfs(deque, 0, nums);
         return res;
     }
 
-    public void dfs(int[] nums, Deque<Integer> deque, int index) {
-        if (index == nums.length) {
-            res.add(new ArrayList<>(deque));
-            return;
-        }
-        //不取
-        dfs(nums, deque, index + 1);
-        //取
-        deque.offer(nums[index]);
-        dfs(nums, deque, index + 1);
-        //回溯
-        deque.pollLast();
-    }
+    private void dfs(Deque<Integer> deque, int begin, int[] nums) {
+        res.add(new ArrayList<>(deque));
 
-    public static void main(String[] args) {
-        new _78_子集().subsets2(new int[]{1, 2, 3});
-    }
-
-    public List<List<Integer>> subsets2(int[] nums) {
-        if (nums.length == 0) return res;
-        Deque<Integer> deque = new LinkedList<>();
-        res.add(new ArrayList<>());
-        dfs2(nums, deque, 0);
-        return res;
-    }
-
-    private void dfs2(int[] nums, Deque<Integer> deque, int index) {
-        if (index == nums.length) return;
-        for (int i = index; i < nums.length; i++) {
+        for (int i = begin; i < nums.length; i++) {
             deque.offer(nums[i]);
-            res.add(new ArrayList<>(deque));
-            dfs(nums, deque, i + 1);
+            dfs(deque, i + 1, nums);
             deque.pollLast();
         }
     }
