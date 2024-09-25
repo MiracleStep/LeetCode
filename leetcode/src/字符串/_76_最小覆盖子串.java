@@ -18,7 +18,7 @@ public class _76_最小覆盖子串 {
             }
             if (charCount == 0) { //当前子串已经满足覆盖了
                 int lidx = s.charAt(left) - 'A';
-                while(left < i && sCount[lidx] > tCount[lidx]) { //左边存在冗余的字母，需要收缩滑动窗口
+                while(sCount[lidx] > tCount[lidx]) { //左边存在冗余的字母，需要收缩滑动窗口
                     sCount[lidx]--;
                     left++;
                     lidx = s.charAt(left) - 'A'; //可能存在越界，需要left < i 判断一下
