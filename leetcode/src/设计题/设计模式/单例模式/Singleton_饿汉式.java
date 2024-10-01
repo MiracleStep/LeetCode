@@ -1,4 +1,4 @@
-package 设计模式.单例模式;
+package 设计题.设计模式.单例模式;
 
 
 public class Singleton_饿汉式 {

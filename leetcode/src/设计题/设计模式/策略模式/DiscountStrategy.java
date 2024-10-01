@@ -1,4 +1,4 @@
-package 设计模式.策略模式;
+package 设计题.设计模式.策略模式;
 
 import java.util.HashMap;
 import java.util.Map;

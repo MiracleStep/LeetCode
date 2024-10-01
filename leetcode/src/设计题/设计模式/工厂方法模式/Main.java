@@ -1,4 +1,4 @@
-package 设计模式.工厂方法模式;
+package 设计题.设计模式.工厂方法模式;
 
 /**
  * @author Mirac
