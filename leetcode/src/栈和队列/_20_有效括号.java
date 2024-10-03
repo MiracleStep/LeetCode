@@ -1,24 +1,24 @@
 package 栈和队列;
 
-import java.util.Stack;
+import java.util.Deque;
+import java.util.LinkedList;
 
 public class _20_有效括号 {
     public boolean isValid(String s){
-        char[] chars = s.toCharArray();
-        Stack<Character> stack = new Stack<>();
-        for (int i = 0; i < chars.length; i++){
-            if (chars[i] == '(' || chars[i] == '[' || chars[i] == '{'){
-                stack.push(chars[i]);
-                continue;
-            } else {
-                if (stack.isEmpty()) return false;
-                Character pop = stack.pop();
-                if (chars[i] == ')' && pop != '(') return false;
-                if (chars[i] == ']' && pop != '[') return false;
-                if (chars[i] == '}' && pop != '{') return false;
+        Deque<Character> stack = new LinkedList<>();
+        int len = s.length();
+        for(int i = 0;i < len;i++){
+            char c = s.charAt(i);
+            if(c == '(' || c == '{' || c == '['){
+                stack.push(c);
+            } else { // 右括号
+                if(stack.isEmpty()) return false;
+                char left = stack.pop();
+                if(left == '(' && c != ')') return false;
+                if(left == '[' && c != ']') return false;
+                if(left == '{' && c != '}') return false;
             }
-
         }
-        return stack.isEmpty();
+        return stack.isEmpty();  //遍历完仍有多余的括号返回false
     }
 }

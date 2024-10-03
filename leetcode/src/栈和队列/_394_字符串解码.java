@@ -1,30 +1,33 @@
 package 栈和队列;
 
-import java.util.Stack;
+import java.util.Deque;
+import java.util.LinkedList;
 
 public class _394_字符串解码 {
     public String decodeString(String s) {
-        StringBuilder res = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         int num = 0;
-        Stack<Integer> numStack = new Stack<>();
-        Stack<String> prestrStack = new Stack<>();
+
+        Deque<Integer> numStack = new LinkedList<>();
+        Deque<String> prestrStack = new LinkedList<>();
+
         for (Character c : s.toCharArray()) {
             if (c >= 'a' && c <= 'z') {
-                res.append(c);
-            } else if (c == '[') { // 入栈
+                sb.append(c);
+            } else if (c >= '0' && c<= '9') {
+                num = num * 10 + Integer.parseInt(c + "");
+            } else if (c == '[') {//入栈
                 numStack.push(num);
-                prestrStack.push(res.toString());
-                res = new StringBuilder();
+                prestrStack.push(sb.toString());
                 num = 0;
-            } else if (c == ']') { //出栈
+                sb = new StringBuilder();
+            } else if (c == ']') {//出栈
                 StringBuilder tmp = new StringBuilder();
                 int curNum = numStack.pop();
-                for (int i = 0; i < curNum; i++) tmp.append(res.toString());
-                res = new StringBuilder(prestrStack.pop() + tmp.toString());
-            } else if (c >= '0' && c <= '9') {
-                num = num * 10 + Integer.parseInt(c + "");
+                for (int i = 0; i < curNum; i++) tmp.append(sb.toString());
+                sb = new StringBuilder(prestrStack.pop() + tmp.toString());
             }
         }
-        return res.toString();
+        return sb.toString();
     }
 }
