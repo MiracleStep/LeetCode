@@ -4,6 +4,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 public class _84_柱状图中最大的矩形 {
+    //单调栈
     public int largestRectangleArea(int[] heights) {
         int len = heights.length;
         Deque<Integer> stack = new LinkedList<>();//维护一个单调递增的栈(单调栈)
@@ -11,7 +12,7 @@ public class _84_柱状图中最大的矩形 {
         for (int i = 0; i < len; i++) {
             while (!stack.isEmpty() && heights[i] < heights[stack.peek()]) {
                 //遍历到的高度比单调递增栈的栈顶节点矮
-                int curHeight = heights[stack.poll()];//处理这个高节点，以当前高度为基础找到最大面积。
+                int curHeight = heights[stack.pop()];//处理这个高节点，以当前高度为基础找到最大面积。
                 while (!stack.isEmpty() && curHeight == heights[stack.peek()]) {
                     stack.pop();//pop掉所有相同高度的
                 }
