@@ -1,7 +1,28 @@
 package 数组;
 
 public class _75_颜色分类 {
+
     public void sortColors(int[] nums) {
+        int p0 = 0, p1 = 0;
+        if (nums.length == 1) return;
+        int ptr = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0) {
+                nums[i] = nums[ptr];
+                nums[ptr] = 0;
+                ptr++;
+            }
+        }
+
+        for (int i = ptr; i < nums.length; i++) {
+            if (nums[i] == 1) {
+                nums[i] = nums[ptr];
+                nums[ptr] = 1;
+                ptr++;
+            }
+        }
+    }
+    public void sortColors2(int[] nums) {
         int p0 = 0, p1 = 0;
         if (nums.length == 1) return;
         for (int i = 0; i < nums.length; i++) {
