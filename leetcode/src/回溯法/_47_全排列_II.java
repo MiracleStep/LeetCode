@@ -9,7 +9,7 @@ import java.util.*;
 public class _47_全排列_II {
     List<List<Integer>> res = new ArrayList<>();
 
-    public List<List<Integer>> permuteUnique(int\[] nums) {
+    public List<List<Integer>> permuteUnique(int[] nums) {
         Arrays.sort(nums);
         Deque<Integer> deque = new LinkedList<>();
         boolean[] vis = new boolean[nums.length];
