@@ -5,39 +5,34 @@ import java.util.Arrays;
 public class 快速排序 {
     static int[] arrays = new int[]{12, 35, 23, 65, 21, 44, 55};
     public static void main(String[] args) {
-        quickSort(0, arrays.length);
+        quickSort(0, arrays.length - 1);
         System.out.println(Arrays.toString(arrays));
     }
 
     private static void quickSort(int begin, int end) {
-        if (end - begin < 2) return;
-        int mid = pivotIndex(begin, end);
-        quickSort(begin, mid);
-        quickSort(mid + 1, end);
-    }
-
-    private static int pivotIndex(int begin, int end) {
-        int pivot = arrays[begin];
-        end--;//使end指向最后一个节点的索引
-        while (begin < end){
-            while (begin < end) {
-                if (arrays[end] >= pivot) {
-                    end--;
+        if (begin >= end) return;//如果只有一个元素直接返回，递归基
+        //选取一个轴点元素
+        int pivot = arrays[begin], left = begin, right = end;
+        while(left < right) {
+            while (left < right) {
+                if (arrays[right] >= pivot) {
+                    right--;
                 } else {
-                    arrays[begin++] = arrays[end];
+                    arrays[left++] = arrays[right];
                     break;
                 }
             }
-            while (begin < end) {
-                if (arrays[begin] <= pivot) {
-                    begin++;
+            while (left < right) {
+                if (arrays[left] <= pivot) {
+                    left++;
                 } else {
-                    arrays[end--] = arrays[begin];
+                    arrays[right--] = arrays[left];
                     break;
                 }
             }
         }
-        arrays[begin] = pivot;//begin == end
-        return begin;
+        arrays[left] = pivot;//left == right
+        quickSort(begin, left - 1);  //快排左边的部分
+        quickSort(left + 1, end);  //快排右边的部分
     }
 }
