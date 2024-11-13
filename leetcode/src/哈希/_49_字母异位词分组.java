@@ -19,7 +19,7 @@ public class _49_字母异位词分组 {
             list.add(str);
             map.put(key, list);
         }
-        return new ArrayList<List<String>>(map.values());
+        return new ArrayList<>(map.values());
     }
 
     // 计数：bbdaaa -> a3b2d1 扔到哈希表匹配
