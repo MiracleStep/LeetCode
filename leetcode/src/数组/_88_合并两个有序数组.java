@@ -2,18 +2,27 @@ package 数组;
 
 public class _88_合并两个有序数组 {
     public void merge(int[] nums1, int m, int[] nums2, int n) {
-        int i = m - 1, j = n - 1;
+        if (m == 1 && n == 0) return;
+        if (m == 0 && n == 1) {
+            nums1[0] = nums2[0];
+            return;
+        }
+        int left = m - 1, right = n - 1;
         int cur = m + n - 1;
-        while (i >= 0 || j >= 0) {
-            if (i == -1) {
-                nums1[cur--] = nums2[j--];
-            } else if (j == -1) {
-                nums1[cur--] = nums1[i--];
-            } else if (nums1[i] > nums2[j]) {
-                nums1[cur--] = nums1[i--];
+        while (left >= 0 && right >= 0) {
+            if (nums1[left] >= nums2[right]) {
+                nums1[cur--] = nums1[left--];
             } else {
-                nums1[cur--] = nums2[j--];
+                nums1[cur--] = nums2[right--];
             }
+        }
+
+        while (left >= 0) {
+            nums1[cur--] = nums1[left--];
+        }
+
+        while (right >= 0) {
+            nums1[cur--] = nums2[right--];
         }
     }
 }
