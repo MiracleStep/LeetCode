@@ -8,17 +8,10 @@ import java.util.Queue;
  */
 public class _226_翻转二叉树 {
     public TreeNode invertTree(TreeNode root) {
-        if (root == null) return null;
-
-        //root.left = invertTree(root.right);
-        //root.right = invertTree(root.left);不能直接写，因为交换其中子节点后，父节点的原来子节点被覆盖
+        if (root == null || (root.left == null && root.right == null)) return root;
         TreeNode tmp = root.left;
-        root.left = root.right;
-        root.right = tmp;
-
-        invertTree(root.right);
-        invertTree(root.left);
-
+        root.left = invertTree(root.right);
+        root.right = invertTree(tmp);
         return root;
     }
 
