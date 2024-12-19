@@ -13,9 +13,6 @@ public class _131_分割回文串 {
         if (len == 0) {
             return res;
         }
-
-        Deque<String> deque = new LinkedList<>();
-
         //动态规划：回文子串题目
         boolean[][] dp = new boolean[len][len];//s[i]-s[j]是否为回文串
         for (int i = 0; i < len; i++) {//初始化
@@ -33,7 +30,9 @@ public class _131_分割回文串 {
                 }
             }
         }
+
         //开始dfs，dp作为判断是否是回文串的依据。
+        Deque<String> deque = new LinkedList<>();
         dfs(s, deque, 0, dp);
         return res;
     }
