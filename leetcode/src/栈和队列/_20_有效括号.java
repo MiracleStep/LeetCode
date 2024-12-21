@@ -19,6 +19,7 @@ public class _20_有效括号 {
                 if(left == '{' && c != '}') return false;
             }
         }
-        return stack.isEmpty();  //遍历完仍有多余的括号返回false
+        //遍历完仍有多余的括号返回false
+        return stack.isEmpty();
     }
 }
