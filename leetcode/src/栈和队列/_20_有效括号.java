@@ -11,7 +11,7 @@ public class _20_有效括号 {
             char c = s.charAt(i);
             if(c == '(' || c == '{' || c == '['){
                 stack.push(c);
-            } else { // 右括号s
+            } else { // 右括
                 if(stack.isEmpty()) return false;
                 char left = stack.pop();
                 if(left == '(' && c != ')') return false;
