@@ -7,7 +7,8 @@ public class _84_柱状图中最大的矩形 {
     //单调栈
     public int largestRectangleArea(int[] heights) {
         int len = heights.length;
-        Deque<Integer> stack = new LinkedList<>();//维护一个单调递增的栈(单调栈)
+        //维护一个单调递增的栈(单调栈)
+        Deque<Integer> stack = new LinkedList<>();
         int res = 0;
         for (int i = 0; i < len; i++) {
             while (!stack.isEmpty() && heights[i] < heights[stack.peek()]) {
