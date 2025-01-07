@@ -6,13 +6,11 @@ public class _45_跳跃游戏II {
         int maxCoverage = 0;
         int endPoint = 0;
         for (int i = 0; i < nums.length - 1; i++) {
-            maxCoverage = Math.max(maxCoverage, i + nums[i]);
+            maxCoverage = Math.max(nums[i] + i, maxCoverage);
             if (i == endPoint) {
-                res++;
                 endPoint = maxCoverage;
-                if (endPoint >= nums.length - 1) {//剪枝：判断是否能够提前结束
-                    return res;
-                }
+                res++;
+                if (endPoint >= nums.length - 1) return res;
             }
         }
         return res;
