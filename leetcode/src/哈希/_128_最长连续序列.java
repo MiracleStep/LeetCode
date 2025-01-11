@@ -8,21 +8,21 @@ public class _128_最长连续序列 {
     //最优解
     public int longestConsecutive(int[] nums) {
         Set<Integer> set = new HashSet<>();
-        int res = 0;
         for (int num : nums) {
             set.add(num);
         }
-
+        int res = 0;
         for (int num : nums) {
-            int count = 1;
-            if (!set.contains(num + 1)) { //这个是最大的值了，没有比它更大的了
-                while (set.contains(--num)) {
+            if (!set.contains(num + 1)) {
+                int count = 1;
+                int curNum = num - 1;
+                while (set.contains(curNum)) {
                     count++;
+                    curNum--;
                 }
+                res = Math.max(res, count);
             }
-            res = Math.max(res, count);
         }
-
         return res;
     }
 
