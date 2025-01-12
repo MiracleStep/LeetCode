@@ -4,15 +4,18 @@ import java.util.Arrays;
 
 public class _322_零钱兑换 {
     public int coinChange(int[] coins, int amount) {
+        //总金额为i时的最小硬币数
         int[] dp = new int[amount + 1];
         Arrays.sort(coins);
         for (int i = 1; i <= amount; i++) {
             dp[i] = Integer.MAX_VALUE;
-            for (int coin : coins) {
-                if (coin > i) {//面额太大了，无法找。直接剪枝
-                    continue;
+            for (int coin : coins) { // 硬币的数量是无限。
+                if (coin > i) {
+                    //面额太大了，无法找。直接剪枝
+                    break;
                 } else if (dp[i - coin] != Integer.MAX_VALUE){
-                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                    //用与不用
+                    dp[i] = Math.min(dp[i - coin] + 1, dp[i]);
                 }
             }
         }
