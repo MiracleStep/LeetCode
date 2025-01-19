@@ -18,4 +18,13 @@ public class _69_x的平方根 {
         //结合题目来看right肯定是符合题目要求的，不需要判断直接返回
         return (int)right;
     }
+
+    //非常简单但不是最优的解法。
+    public int mySqrt2(int x) {
+        long i = 1;
+        while (i * i <= x) {
+            i += 1;
+        }
+        return (int)(i - 1);
+    }
 }
