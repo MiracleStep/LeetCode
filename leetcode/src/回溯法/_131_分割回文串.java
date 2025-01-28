@@ -19,7 +19,7 @@ public class _131_分割回文串 {
             dp[i][i] = true;
         }
         //确定状态转移方程和状态转移顺序
-        for (int i = len - 1; i >= 0; i--) {
+        for (int i = len - 2; i >= 0; i--) {
             for (int j = i + 1; j < len; j++) {
                 if (s.charAt(i) == s.charAt(j)) {
                     if (j - i == 1) {

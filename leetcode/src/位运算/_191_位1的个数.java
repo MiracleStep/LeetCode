@@ -10,6 +10,7 @@ public class _191_位1的个数 {
         }
         return res;
     }
+    
     public int hammingWeight2(int n) {
         int res = 0;
         while(n != 0){
