@@ -31,5 +31,13 @@ public class _55_跳跃游戏 {
         return true;
     }
 
-
+    public boolean canJump3(int[] nums) {
+        int maxCoverate = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (i > maxCoverate) return false;
+            maxCoverate = Math.max(maxCoverate, i + nums[i]);
+            if (maxCoverate > nums.length) return true;
+        }
+        return true;
+    }
 }
