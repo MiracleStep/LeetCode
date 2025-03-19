@@ -7,16 +7,18 @@ public class _78_子集 {
 
     public List<List<Integer>> subsets(int[] nums) {
         Deque<Integer> deque = new LinkedList<>();
-        dfs(deque, 0, nums);
+        // res.add(new ArrayList<>());
+        dfs(deque, nums, 0);
         return res;
     }
 
-    private void dfs(Deque<Integer> deque, int begin, int[] nums) {
+    private void dfs(Deque<Integer> deque, int[] nums, int begin) {
         res.add(new ArrayList<>(deque));
 
         for (int i = begin; i < nums.length; i++) {
             deque.offer(nums[i]);
-            dfs(deque, i + 1, nums);
+            // res.add(new ArrayList<>(deque));     //也可以放这里
+            dfs(deque, nums, i + 1);
             deque.pollLast();
         }
     }

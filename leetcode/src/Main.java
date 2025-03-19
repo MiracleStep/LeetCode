@@ -1,59 +1,34 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
 public class Main {
-    static int res = 0;
-    static int[][] dir = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+    private static int heapSize;
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int m = sc.nextInt();
-        int[][] g = new int[n][m];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                g[i][j] = sc.nextInt();
-            }
+        int[] arrays = new int[20];
+        heapSize = arrays.length;
+        for (int i = (heapSize >> 2) - 1; i >= 0; i--) {
+            siftDown(arrays, i);
         }
-        boolean[][] leftTop = new boolean[n][m];
-        boolean[][] rightBottom = new boolean[n][m];
-
-        // 从左上边界出发进行DFS
-        for (int j = 0; j < m; j++) {
-            dfs(g, leftTop, 0, j, Integer.MIN_VALUE);
-            dfs(g, rightBottom, n - 1, j, Integer.MIN_VALUE);
-        }
-
-        // 从右下边界出发进行DFS
-        for (int i = 0; i < n; i++) {
-            dfs(g, leftTop, i, 0, Integer.MIN_VALUE);
-            dfs(g, rightBottom, i, m - 1, Integer.MIN_VALUE);
-        }
-
-        // 当两个边界二维数组在某个位置都为true时，符合题目要求
-        List<int[]> res = new ArrayList<>();
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (leftTop[i][j] && rightBottom[i][j]) {
-                    res.add(new int[]{i, j});
-                }
-            }
-        }
-
-        for (int[] cur : res) {
-            System.out.println(cur[0] + " " + cur[1]);
+        while (heapSize > 1) {
+            int tmp = arrays[0];
+            arrays[0] = arrays[--heapSize];
         }
     }
 
-    private static void dfs(int[][] g, boolean[][] vis, int x, int y, int pre) {
-        if (x < 0 || x >= g.length || y < 0 || y >= g[0].length || vis[x][y]) {
-            return;
+    private static void siftDown(int[] arrays, int index) {
+        int cur = arrays[index];
+        int half = heapSize >> 1;
+        while (index < half) {
+            int childIndex = (index << 1) + 1;
+            int child = arrays[childIndex];
+            if (childIndex + 1 < heapSize && arrays[childIndex + 1] > child) {
+                childIndex = childIndex + 1;
+                child = arrays[childIndex + 1];
+            }
+            if (child > cur) {
+                arrays[index] = child;
+                index = childIndex;
+            } else {
+                break;
+            }
         }
-        if (g[x][y] < pre) return;
-        vis[x][y] = true;
-        dfs(g, vis, x + 1, y, g[x][y]);
-        dfs(g, vis, x - 1, y, g[x][y]);
-        dfs(g, vis, x, y + 1, g[x][y]);
-        dfs(g, vis, x, y - 1, g[x][y]);
+        arrays[index] = cur;
     }
 }
