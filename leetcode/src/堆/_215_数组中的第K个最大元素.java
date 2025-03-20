@@ -51,4 +51,46 @@ public class _215_数组中的第K个最大元素 {
             return quickSort(nums, left + 1, end, k);
         }
     }
+
+
+    int len;
+    public int findKthLargest3(int[] nums, int k) {
+        len = nums.length;
+        for (int i = (len >> 1) - 1; i >= 0; i--) {
+            siftDown(nums, i);
+        }
+        k--;
+        while (k-- > 0) {
+            swap(nums, 0, len - 1);
+            len--;
+            siftDown(nums, 0);
+        }
+        return nums[0];
+    }
+
+    private void siftDown(int[] nums, int index) {
+        int cur = nums[index];
+        int half = len >> 1;
+        while (index < half) {
+            int childIndex = (index << 1) + 1;
+            int child = nums[childIndex];
+            if (childIndex + 1 < len && nums[childIndex + 1] > child) {
+                childIndex = childIndex + 1;
+                child = nums[childIndex];
+            }
+            if (child > cur) {
+                nums[index] = child;
+                index = childIndex;
+            } else {
+                break;
+            }
+        }
+        nums[index] = cur;
+    }
+
+    private static void swap(int[] nums, int i, int j) {
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+    }
 }
