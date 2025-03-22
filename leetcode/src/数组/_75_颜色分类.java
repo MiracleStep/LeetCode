@@ -1,45 +1,26 @@
 package 数组;
 
 public class _75_颜色分类 {
-
     public void sortColors(int[] nums) {
-        int p0 = 0, p1 = 0;
         if (nums.length == 1) return;
-        int ptr = 0;
-        for (int i = 0; i < nums.length; i++) {
+        int i = 0;
+        int p0 = 0, p2 = nums.length;
+        while (i < p2) {
             if (nums[i] == 0) {
-                nums[i] = nums[ptr];
-                nums[ptr] = 0;
-                ptr++;
-            }
-        }
-
-        for (int i = ptr; i < nums.length; i++) {
-            if (nums[i] == 1) {
-                nums[i] = nums[ptr];
-                nums[ptr] = 1;
-                ptr++;
+                swap(nums, i, p0);
+                p0++;
+                i++;
+            } else if (nums[i] == 1) {
+                i++;
+            } else {
+                swap(nums, i, --p2);
             }
         }
     }
-    public void sortColors2(int[] nums) {
-        int p0 = 0, p1 = 0;
-        if (nums.length == 1) return;
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] == 0) {
-                nums[i] = nums[p0];
-                nums[p0] = 0;
-                if (p0 < p1) {  //当 p0 < p1 此时交换已经把1交换出去了，因此再交换回来到p1位置
-                    nums[i] = nums[p1];
-                    nums[p1] = 1;
-                }
-                p0++;
-                p1++;
-            } else if (nums[i] == 1) {
-                nums[i] = nums[p1];
-                nums[p1] = 1;
-                p1++;
-            }
-        }
+
+    private void swap(int[] nums, int left, int right) {
+        int tmp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = tmp;
     }
 }
