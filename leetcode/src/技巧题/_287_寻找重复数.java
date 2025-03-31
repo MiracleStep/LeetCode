@@ -1,9 +1,5 @@
 package 技巧题;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 public class _287_寻找重复数 {
     public int findDuplicate(int[] nums) {
         int len = nums.length;
@@ -27,5 +23,22 @@ public class _287_寻找重复数 {
             }
         }
         return left;
+    }
+
+    public int findDuplicate2(int[] nums) {
+        int n = nums.length;
+        int slow = 0, fast = 0;
+        while (true) {
+            slow = nums[slow];//跳一次
+            fast = nums[nums[fast]];//跳两次
+            if (slow == fast) {
+                int tmp = 0;
+                while (tmp != slow) {
+                    tmp = nums[tmp];
+                    slow = nums[slow];
+                }
+                return slow;
+            }
+        }
     }
 }
