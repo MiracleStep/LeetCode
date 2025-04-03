@@ -16,4 +16,16 @@ public class _392_判断子序列 {
         }
         return dp[s.length()][t.length()] == s.length();
     }
+
+    public boolean isSubsequence2(String s, String t) {
+        int m = s.length(), n = t.length();
+        int left = 0, right = 0;
+        while (left < m && right < n) {
+            if (s.charAt(left) == t.charAt(right)) {
+                left++;
+            }
+            right++;
+        }
+        return left == s.length();
+    }
 }

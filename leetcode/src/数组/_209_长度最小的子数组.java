@@ -1,43 +1,20 @@
 package 数组;
 
 public class _209_长度最小的子数组 {
-    public static void main(String[] args) {
-        System.out.println(new _209_长度最小的子数组().minSubArrayLen2(4, new int[]{1,4,4}));
-    }
-    // 双指针
     public int minSubArrayLen(int target, int[] nums) {
-        int i = 0;
+        int n = nums.length;
+        int left = 0;
+        int res = Integer.MAX_VALUE;
         int sum = 0;
-        int minLen = Integer.MAX_VALUE;
-        for (int j = 0; j < nums.length || sum >= target; ){
-            if (sum >= target){
-                minLen = Math.min(minLen, j - i);
-                sum -= nums[i++];
-            } else {
-                sum += nums[j++];
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            if (sum >= target) {
+                while (left < i && sum - nums[left] >= target) {
+                    sum -= nums[left++];
+                }
+                res = Math.min(i - left + 1, res);
             }
         }
-        if (minLen == Integer.MAX_VALUE){
-            minLen = 0;
-        }
-        return minLen;
-    }
-
-    // 优化，双指针 *
-    public int minSubArrayLen2(int target, int[] nums) {
-        int i = 0;
-        int sum = 0;
-        int minLen = Integer.MAX_VALUE;
-        for (int j = 0; j < nums.length; j++){
-            sum += nums[j];
-            while (sum >= target){
-                minLen = Math.min(minLen, j - i + 1);
-                sum -= nums[i++];
-            }
-        }
-        if (minLen == Integer.MAX_VALUE){
-            minLen = 0;
-        }
-        return minLen;
+        return res == Integer.MAX_VALUE ? 0 : res;
     }
 }

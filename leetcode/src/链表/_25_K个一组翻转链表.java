@@ -2,27 +2,26 @@ package 链表;
 
 public class _25_K个一组翻转链表 {
     public ListNode reverseKGroup(ListNode head, int k) {
-        if (head == null || head.next == null) return head;
-        int len = 0;
+        if (head == null) return head;
         ListNode cur = head;
-        while (cur != null && len < k) {//统计节点数
-            cur = cur. next;
-            len++;
-        }
-
-        if (len == k) { //长度为k就翻转
-            cur = reverseKGroup(cur, k); //翻转接下来的节点
-            while (len > 0) { //翻转n个节点
-                ListNode tmp = head.next;
-                head.next = cur;
-                cur = head;
-                head = tmp;
-                len--;
+        int count = 0;
+        while (cur != null){
+            cur = cur.next;
+            count++;
+            if (count == k) {
+                break;
             }
-        } else {
-            //不翻转
-            return head;
         }
-        return cur;
+        if (count < k) {
+            return head;//长度不为k就直接返回
+        }
+        ListNode pre = reverseKGroup(cur, k);//翻转接下来的节点
+        while (k-- > 0) {//翻转k个节点
+            ListNode tmp = head.next;
+            head.next = pre;
+            pre = head;
+            head = tmp;
+        }
+        return pre;
     }
 }
