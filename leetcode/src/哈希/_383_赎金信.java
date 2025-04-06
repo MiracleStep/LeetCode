@@ -2,15 +2,16 @@ package 哈希;
 
 public class _383_赎金信 {
     public boolean canConstruct(String ransomNote, String magazine) {
-        int[] count = new int[26];
-        for(char c : ransomNote.toCharArray()){
-            count[c - 'a']++;
+        int m = ransomNote.length(), n = magazine.length();
+        int[] mCount = new int[26];
+        for (int i = 0; i < n; i++) {
+            int idx = magazine.charAt(i) - 'a';
+            mCount[idx]++;
         }
-        for(char c : magazine.toCharArray()){
-            count[c - 'a']--;
-        }
-        for(int i : count){
-            if (i > 0) return false;
+
+        for (int i = 0; i < m; i++) {
+            int idx = ransomNote.charAt(i) - 'a';
+            if (--mCount[idx] < 0) return false;
         }
         return true;
     }
