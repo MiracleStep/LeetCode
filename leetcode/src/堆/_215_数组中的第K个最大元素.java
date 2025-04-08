@@ -15,15 +15,18 @@ public class _215_数组中的第K个最大元素 {
         return heap.peek();
     }
 
-    //快速排序
     public int findKthLargest2(int[] nums, int k) {
-        return quickSort(nums, 0, nums.length - 1, nums.length - k);
+        int len = nums.length;
+        quickSort(nums, 0, len - 1, len - k);
+        return nums[len - k];
     }
 
-    //结束条件就是到达倒数第k个，因为根据快排的规定，选择的轴点元素位置不会改变，只会继续对左右元素进行排序
-    private int quickSort(int[] nums, int begin, int end, int k) {
-        if (begin == end) return nums[begin];
-        int pivot = nums[begin], left = begin, right = end;
+    private void quickSort(int[] nums, int begin, int end, int index) {
+        if (begin >= end) return;
+        int mid = begin + (end - begin) / 2;
+        int pivot = nums[mid];
+        nums[mid] = nums[begin];
+        int left = begin, right = end;
         while (left < right) {
             while (left < right) {
                 if (nums[right] >= pivot) {
@@ -43,12 +46,12 @@ public class _215_数组中的第K个最大元素 {
             }
         }
         nums[left] = pivot;
-        //轴点元素位置
-        if (left == k) return nums[left];
-        if (left > k) {
-            return quickSort(nums, begin, left - 1, k);
+        if (left == index) {
+            return;
+        } else if (left < index) {
+            quickSort(nums, left + 1, end, index);
         } else {
-            return quickSort(nums, left + 1, end, k);
+            quickSort(nums, begin, left - 1, index);
         }
     }
 
