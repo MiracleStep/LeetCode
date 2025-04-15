@@ -19,7 +19,7 @@ public class _131_分割回文串 {
             dp[i][i] = true;
         }
         //确定状态转移方程和状态转移顺序
-        for (int i = len - 2; i >= 0; i--) {
+        for (int i = len - 1; i >= 0; i--) {
             for (int j = i + 1; j < len; j++) {
                 if (s.charAt(i) == s.charAt(j)) {
                     if (j - i == 1) {
@@ -33,11 +33,11 @@ public class _131_分割回文串 {
 
         //开始dfs，dp作为判断是否是回文串的依据。
         Deque<String> deque = new LinkedList<>();
-        dfs(s, deque, 0, dp);
+        dfs(s, deque, dp, 0);
         return res;
     }
 
-    private void dfs(String s, Deque<String> deque, int index, boolean[][] dp) {
+    private void dfs(String s, Deque<String> deque, boolean[][] dp, int index) {
         //递归基
         if (index == s.length()) {
             res.add(new ArrayList<>(deque));
@@ -49,8 +49,8 @@ public class _131_分割回文串 {
             if (dp[index][i]) {  //index - i 是回文串
                 deque.offer(s.substring(index, i + 1));  //截取index - i 的回文串.
                 //dfs 从i + 1开始
-                dfs(s, deque, i + 1, dp);
-                deque.removeLast();  //回溯
+                dfs(s, deque, dp, i + 1);
+                deque.pollLast();  //回溯
             }
         }
     }
