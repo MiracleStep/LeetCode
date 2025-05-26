@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class LCR_157_套餐内商品的排列顺序 {
+    //回溯法解决，但不是最优
     Set<String> set = new HashSet<>();
     public String[] goodsOrder(String goods) {
         StringBuilder sb = new StringBuilder();
